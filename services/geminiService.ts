@@ -1,6 +1,6 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 
+// The API key is injected by Vite at build time from Netlify environment variables
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
 
 export const analyzeSoraLink = async (url: string) => {
@@ -24,7 +24,7 @@ export const analyzeSoraLink = async (url: string) => {
   });
 
   try {
-    return JSON.parse(response.text);
+    return JSON.parse(response.text || "{}");
   } catch (e) {
     console.error("Failed to parse AI response", e);
     return null;
